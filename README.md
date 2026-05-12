@@ -5,9 +5,9 @@ This is a starter repo for creating a browser extension with typescript and reac
 ## Features
 
 - 🚀 TypeScript support
-- ⚛️ React for popup and options pages
+- ⚛️ React popup
 - 📦 Webpack bundling
-- 🔄 Hot reload during development
+- 🔄 Watch builds during development
 - 🌐 Cross-browser support (Chrome & Firefox)
 - 🎨 CSS and asset handling
 - 🔧 Manifest V3 compliant
@@ -18,12 +18,12 @@ This is a starter repo for creating a browser extension with typescript and reac
 2. Development mode:
 
 - For Chrome: `pnpm run dev:chrome`
-- For Firefox: `pnpm run dev:firerox`
+- For Firefox: `pnpm run dev:firefox`
 
 3. Production build:
 
 - For Chrome: `pnpm run build:chrome`
-- For Firefox: `pnpm run build:firerox`
+- For Firefox: `pnpm run build:firefox`
 
 ## Loading the extension in Chrome
 

@@ -11,9 +11,6 @@ export const useStorageState = <T>(key: string, defaultValue: T) => {
 
     const listener = (changes: { [key: string]: Storage.StorageChange }) => {
       if (changes[key]) {
-        const oldValue = changes[key].oldValue
-        const newValue = changes[key].newValue
-        console.log(`${JSON.stringify(oldValue)} -> ${JSON.stringify(newValue)}`)
         setValue((changes[key].newValue as T) ?? defaultValue)
       }
     }

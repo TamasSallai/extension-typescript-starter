@@ -45,9 +45,9 @@ module.exports = (env) => {
         ],
       }),
       new HtmlPlugin({
-        title: 'Fifty Extension',
+        title: 'Extension - Starter',
         filename: 'popup.html',
-        chunk: ['popup'],
+        chunks: ['popup'],
       }),
     ],
     resolve: {

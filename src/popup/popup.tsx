@@ -2,32 +2,40 @@ import './popup.css'
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { DEFAULT_SETTINGS } from '../storage'
+import { DEFAULT_SETTINGS, Settings } from '../storage'
 import { useStorageState } from './hooks/useStorageState'
-
-type Settings = typeof DEFAULT_SETTINGS
 
 const Popup = () => {
   const [settings, setSettings] = useStorageState<Settings>('settings', DEFAULT_SETTINGS)
 
+  const updateSetting = (key: keyof Settings, checked: boolean) => {
+    setSettings({ ...settings, [key]: checked })
+  }
+
   return (
-    <div>
-      <label>
+    <main className="popup">
+      <header>
+        <h1>Extension Starter</h1>
+      </header>
+
+      <label className="setting">
         <input
           type="checkbox"
           checked={settings.exampleSetting}
-          onChange={(e) => setSettings({ ...settings, exampleSetting: e.target.checked })}
+          onChange={(e) => updateSetting('exampleSetting', e.target.checked)}
         />
+        <span>Enable primary setting</span>
       </label>
 
-      <label>
+      <label className="setting">
         <input
           type="checkbox"
           checked={settings.exampleSetting2}
-          onChange={(e) => setSettings({ ...settings, exampleSetting2: e.target.checked })}
+          onChange={(e) => updateSetting('exampleSetting2', e.target.checked)}
         />
+        <span>Enable secondary setting</span>
       </label>
-    </div>
+    </main>
   )
 }
 

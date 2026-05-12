@@ -5,16 +5,27 @@ export const DEFAULT_SETTINGS = {
   exampleSetting2: false,
 }
 
-export const initializeStorage = async () => {
-  const storage = await Browser.storage.local.get(['settings', 'data'])
+export type Settings = typeof DEFAULT_SETTINGS
 
-  const updates: Record<string, any> = {}
+type StoredSettings = Partial<Settings>
 
-  if (!storage.settings) {
-    updates['settings'] = DEFAULT_SETTINGS
+const settingsChanged = (current: StoredSettings | undefined, next: Settings) => {
+  if (!current) {
+    return true
   }
 
-  if (Object.keys(updates).length > 0) {
-    await Browser.storage.local.set(updates)
+  return (Object.keys(next) as Array<keyof Settings>).some((key) => current[key] !== next[key])
+}
+
+export const initializeStorage = async () => {
+  const storage = await Browser.storage.local.get(['settings'])
+  const currentSettings = storage.settings as StoredSettings | undefined
+  const settings = {
+    ...DEFAULT_SETTINGS,
+    ...currentSettings,
+  }
+
+  if (settingsChanged(currentSettings, settings)) {
+    await Browser.storage.local.set({ settings })
   }
 }
